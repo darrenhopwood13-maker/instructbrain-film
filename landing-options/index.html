@@ -1,0 +1,469 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>instructBrain — landing page directions</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23203c72'/%3E%3Ctext x='16' y='23' font-size='19' text-anchor='middle' fill='%2357FF00' font-family='sans-serif'%3Ei%3C/text%3E%3C/svg%3E">
+<style>
+  :root{
+    --navy:#203c72; --navy-deep:#182c55; --navy-ink:#0f1a30;
+    --lime:#57FF00; --lime-deep:#3ec700;
+    --ink:#0f1b33; --paper:#f7f7f3; --muted:rgba(255,255,255,.76);
+    --wrap:1280px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:#0b1220; color:#eef2fb;
+    font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .page{max-width:1180px;margin:0 auto;padding:18px 16px 90px}
+
+  /* ---------- page chrome: banner + switch ---------- */
+  .banner{
+    border:1px solid rgba(255,255,255,.16); background:rgba(255,255,255,.05);
+    border-radius:14px; padding:14px 16px; font-size:14px; line-height:1.55;
+  }
+  .banner b{color:#fff}
+  .banner .tag{
+    display:inline-block; background:var(--lime); color:#0b1220; font-weight:800;
+    font-size:11px; letter-spacing:.08em; text-transform:uppercase; padding:3px 8px; border-radius:999px; margin-bottom:8px;
+  }
+  .banner ul{margin:8px 0 0; padding-left:18px; color:rgba(255,255,255,.82)}
+  .banner li{margin:2px 0}
+
+  .switch{position:sticky; top:0; z-index:30; background:#0b1220; padding:14px 0 10px; margin-top:16px}
+  .switch .row{display:flex; gap:8px; flex-wrap:wrap}
+  .switch button{
+    font:inherit; font-weight:700; font-size:15px; cursor:pointer;
+    padding:11px 15px; border-radius:11px; border:1.5px solid rgba(255,255,255,.28);
+    background:transparent; color:#fff;
+  }
+  .switch button[aria-pressed="true"]{background:var(--lime); color:#0b1220; border-color:var(--lime)}
+  .switch .hint{font-size:13px; color:rgba(255,255,255,.6); margin-top:8px}
+
+  h1.vt{font-size:clamp(1.35rem,3.6vw,1.9rem); margin:26px 0 6px}
+  .lede{color:rgba(255,255,255,.8); max-width:74ch; margin:0 0 4px}
+
+  .view{display:none}
+  .view.on{display:block}
+
+  .flag{
+    border:1px solid rgba(255,176,32,.45); background:rgba(255,176,32,.1);
+    border-radius:14px; padding:14px 16px; margin:18px 0;
+  }
+  .flag h2{margin:0 0 6px; font-size:1rem; color:#ffd47a}
+  .flag ul{margin:6px 0 0; padding-left:18px; color:rgba(255,255,255,.86); font-size:14.5px}
+  .flag li{margin:4px 0}
+  .flag code{background:rgba(0,0,0,.35); padding:1px 6px; border-radius:6px; font-size:13px}
+
+  .rec{
+    border-left:4px solid var(--lime); background:rgba(87,255,0,.07);
+    border-radius:10px; padding:13px 15px; margin:18px 0 0; font-size:15px;
+  }
+  .rec b{color:var(--lime)}
+
+  /* ---------- the mock site: rendered at full bleed ---------- */
+  .site{border-radius:18px; overflow:hidden; box-shadow:0 30px 70px -30px rgba(0,0,0,.75); margin-top:14px}
+  .sbar{
+    background:var(--navy-deep); display:flex; align-items:center; justify-content:space-between;
+    padding:14px 22px; border-bottom:1px solid rgba(255,255,255,.12);
+  }
+  .wm{font-weight:800; letter-spacing:-.02em; font-size:20px}
+  .wm i{font-style:normal; color:#fff}
+  .wm b{color:var(--lime)}
+  .signin{border:1.5px solid var(--lime); color:var(--lime); font-weight:700; font-size:14px; padding:8px 16px; border-radius:10px}
+
+  .hero{
+    background:var(--navy); color:#fff; position:relative; overflow:hidden;
+    padding:46px 22px 40px;
+    background-image:linear-gradient(rgba(255,255,255,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.055) 1px,transparent 1px);
+    background-size:38px 38px;
+  }
+  .wrap{max-width:var(--wrap); margin:0 auto}
+  .hero-grid{display:grid; grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr); gap:52px; align-items:center}
+  .tagline{font-size:18px; font-weight:300; color:rgba(255,255,255,.92); margin:14px 0 0}
+  .site h1.big{margin:16px 0 0; font-size:clamp(1.6rem,3.2vw,2.5rem); line-height:1.08; letter-spacing:-.02em}
+  .site p.copy{margin:14px 0 0; font-size:17px; line-height:1.6; color:rgba(255,255,255,.86); max-width:34em}
+  .ctas{display:flex; gap:14px; flex-wrap:wrap; align-items:center; margin-top:24px}
+  .btn-split{display:inline-flex; align-items:stretch; border-radius:10px; overflow:hidden; background:#fff}
+  .btn-split .t{padding:14px 20px; color:#0f1b33; font-weight:700; font-size:15px}
+  .btn-split .a{background:var(--lime); display:flex; align-items:center; padding:0 18px; color:#0b1220; font-weight:800}
+  .btn-line{border:1.5px solid rgba(255,255,255,.5); border-radius:10px; padding:13px 20px; font-weight:700; font-size:15px}
+
+  /* console / report screen */
+  .console{background:var(--paper); color:var(--ink); border-radius:18px; overflow:hidden; text-align:left; box-shadow:0 34px 80px -24px rgba(0,0,0,.65)}
+  .console .ctop{background:var(--navy-deep); color:#fff; display:flex; justify-content:space-between; align-items:center; padding:12px 16px; font-size:13px}
+  .console .ctop .wm{font-size:15px}
+  .cstrip{display:flex; gap:8px; padding:14px; background:#fff; border-bottom:1px solid rgba(15,27,51,.1)}
+  .cstrip img{flex:1; height:92px; object-fit:cover; border-radius:10px; min-width:0}
+  .cpanel{background:#fff; border:1px solid rgba(15,27,51,.12); border-radius:12px; margin:14px; padding:12px 13px}
+  .chead{display:flex; justify-content:space-between; font-size:12.5px; border-bottom:2px solid var(--ink); padding-bottom:6px; margin-bottom:6px}
+  .chead strong{font-size:14px}
+  .crow{display:flex; align-items:center; gap:9px; padding:8px 0; border-bottom:1px dashed rgba(15,27,51,.16); font-size:13px}
+  .crow:last-child{border-bottom:none}
+  .crow span:last-child{flex:1; min-width:0}
+  .chip{font-size:10px; font-weight:800; text-transform:uppercase; letter-spacing:.06em; padding:3px 8px; border-radius:999px; min-width:70px; text-align:center; flex-shrink:0}
+  .chip.pass{background:#e6f9ee; color:#0e8a4e}
+  .chip.warn{background:#fff3d9; color:#a87000}
+  .chip.na{background:#eef0f6; color:#5b6480}
+  .cdock{display:flex; gap:8px; padding:12px 14px; background:#fff; border-top:1px solid rgba(15,27,51,.1)}
+  .mini{flex:1; text-align:center; font-size:12px; font-weight:800; padding:10px 8px; border-radius:999px; border:1px solid rgba(43,75,255,.35); color:#2b4bff; white-space:nowrap}
+  .mini.solid{background:linear-gradient(180deg,rgba(43,75,255,.9),rgba(30,40,90,.95)); color:#fff; border-color:transparent}
+
+  /* dark console variant */
+  .console.dark{background:var(--navy-ink); color:#e9eefb}
+  .console.dark .ctop{background:#0c1526}
+  .console.dark .cstrip{background:var(--navy-ink); border-bottom-color:rgba(255,255,255,.12)}
+  .console.dark .cpanel{background:rgba(255,255,255,.055); border-color:rgba(255,255,255,.14)}
+  .console.dark .chead{border-bottom-color:rgba(255,255,255,.5)}
+  .console.dark .crow{border-bottom-color:rgba(255,255,255,.12)}
+  .console.dark .chip.na{background:rgba(255,255,255,.1); color:rgba(255,255,255,.7)}
+  .console.dark .cdock{background:var(--navy-ink); border-top-color:rgba(255,255,255,.12)}
+  .console.dark .mini{border-color:rgba(255,255,255,.35); color:#cfe0ff}
+
+  /* report-type buttons */
+  .deck{padding:26px 22px 30px; background:rgba(255,255,255,.06)}
+  .deck .inner{max-width:var(--wrap); margin:0 auto}
+  .deck.capped .inner{max-width:896px; margin:0}
+  .deck h3{margin:0 0 14px; font-size:13px; letter-spacing:.14em; text-transform:uppercase; color:rgba(255,255,255,.7); font-weight:800}
+  .three{display:grid; grid-template-columns:repeat(3,1fr); gap:14px}
+  .three a{
+    display:flex; align-items:center; gap:12px; text-decoration:none;
+    border:1.5px solid rgba(87,255,0,.55); border-radius:14px; padding:15px 16px;
+    color:#fff; background:rgba(87,255,0,.06); min-width:0;
+  }
+  .three a .ic{width:30px; height:30px; flex-shrink:0; display:grid; place-items:center; border-radius:9px; background:rgba(87,255,0,.16); color:var(--lime); font-size:16px}
+  .three a .lab{min-width:0}
+  .three a .lab b{display:block; font-size:15.5px; font-weight:700}
+  .three a .lab s{display:block; font-size:12.5px; color:rgba(255,255,255,.68); text-decoration:none}
+  .three a .obj{margin-left:auto; flex-shrink:0; font-size:13px; color:rgba(255,255,255,.6)}
+  .free{margin:16px 0 0; font-size:12.5px; color:rgba(255,255,255,.65); text-align:center}
+  .free.left{text-align:left}
+  .deadband{position:relative}
+  /* the dead strip is shown as hatching, not as a text box, so it cannot sit on a button */
+  .deadband::after{
+    content:""; position:absolute; top:0; right:0; bottom:0;
+    width:max(0px, calc(100% - 896px));
+    background:repeating-linear-gradient(45deg, rgba(255,176,32,.16) 0 9px, transparent 9px 18px);
+    border-left:1.5px dashed rgba(255,176,32,.65); pointer-events:none;
+  }
+  .deadkey{margin:10px 0 0; font-size:12.5px; color:#ffd47a}
+  .pagemark{border:2px dashed rgba(255,176,32,.55); border-radius:16px; padding:0; margin:14px 0 0}
+  .pagemark > .site{margin-top:0; border-radius:14px}
+
+  /* centred-copy variant */
+  .hero.centred{text-align:center}
+  .hero.centred .copy{margin-left:auto; margin-right:auto}
+  .hero.centred .ctas{justify-content:center}
+  .wide-screen{margin-top:30px}
+  .wide-screen .console{border-radius:20px}
+  .wide-screen .cstrip img{height:120px}
+
+  .why{margin:20px 0 0; font-size:14.5px; color:rgba(255,255,255,.82)}
+  .why ul{margin:8px 0 0; padding-left:18px}
+  .why li{margin:4px 0}
+  .why b{color:#fff}
+
+  .foot{margin-top:34px; border-top:1px solid rgba(255,255,255,.14); padding-top:16px; font-size:13.5px; color:rgba(255,255,255,.7)}
+  .foot b{color:#fff}
+
+  @media (max-width:900px){
+    .hero-grid{grid-template-columns:1fr; gap:26px}
+    .three{grid-template-columns:1fr}
+    .deadband::after{position:static; width:auto; margin-top:12px; display:block}
+    .page{padding:14px 12px 70px}
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="banner">
+    <span class="tag">Mock-up, not the product</span>
+    <b>instructBrain landing page — three directions for the top of the page.</b>
+    <div>
+      Built by reading the live page at instructbrain.com on 13 October 2026 and measuring what it
+      renders, not from the source code alone. The photographs are instructBrain's own demo images.
+      <b>Nothing on the live site has been changed.</b> Today's version is view 1, with the two things
+      you named marked on it.
+    </div>
+    <ul>
+      <li>Nothing here is copy I have invented for the product: headings and the offer line are the page's own words.</li>
+      <li>Type, spacing and colours are matched by eye to the live page, so treat very small differences as mine, not the product's fault.</li>
+    </ul>
+  </div>
+
+  <h1 class="vt">Pick the one you want and I'll build it.</h1>
+  <p class="lede">Flick between the four. The switch is sticky, so you can change view without scrolling back up.</p>
+
+  <div class="switch">
+    <div class="row" role="group" aria-label="Choose a view">
+      <button type="button" data-go="today" aria-pressed="true">1 · Today (marked up)</button>
+      <button type="button" data-go="a" aria-pressed="false">2 · Aligned</button>
+      <button type="button" data-go="b" aria-pressed="false">3 · Wide screen</button>
+      <button type="button" data-go="c" aria-pressed="false">4 · Dark screen</button>
+    </div>
+    <div class="hint">View 3 is the one I would build. Reason underneath it.</div>
+  </div>
+
+  <!-- ============================ 1. TODAY ============================ -->
+  <section class="view on" data-view="today">
+    <h1 class="vt">1 · Today, with the problem marked</h1>
+    <div class="flag">
+      <h2>What is wrong on the live page right now</h2>
+      <ul>
+        <li><b>The squashed block.</b> The hero is a 1280px grid, but everything under it — the three buttons, the slogan, the report panel — is wrapped in <code>max-w-4xl</code> (896px) and aligned left. That leaves a 384px dead strip down the right-hand side, which is the "squashed to one side" you are seeing.</li>
+        <li><b>The buttons fight their own contents.</b> Each button carries a label, an arrow and a 3D object, so the arrow lands mid-sentence ("Create custom report→" then the hard hat) and the third one is squeezed with <code>whitespace-nowrap</code>.</li>
+        <li><b>The white slab.</b> The report mock is a full white card sitting beside the copy — it reads as a picture of a screen rather than the product's own surface.</li>
+      </ul>
+    </div>
+    <div class="pagemark">
+      <div class="site">
+        <div class="sbar"><span class="wm"><i>instruct</i><b>Brain</b></span><span class="signin">Sign in</span></div>
+        <div class="hero">
+          <div class="wrap">
+            <div class="hero-grid">
+              <div>
+                <div class="wm" style="font-size:clamp(2rem,4vw,3rem)"><i>instruct</i><b>Brain</b></div>
+                <p class="tagline">Photos in. Client-ready reports out.</p>
+                <h1 class="big">Walk the site. Publish the same afternoon.</h1>
+                <p class="copy">Point, shoot, done. instructBrain turns your site photos into a client-ready report, referenced against the health and safety and building regulations that apply — with the proof and the dates regulators ask for.</p>
+                <div class="ctas">
+                  <span class="btn-split"><span class="t">Start free</span><span class="a">→</span></span>
+                  <span class="btn-line">See how it works</span>
+                </div>
+              </div>
+              <div class="console">
+                <div class="ctop"><span class="wm"><i>instruct</i><b>Brain</b></span><span>Site walk · ALM-2026-0142</span></div>
+                <div class="cstrip">
+                  <img src="https://instructbrain.com/demo/photo-1.jpg" alt="">
+                  <img src="https://instructbrain.com/demo/photo-2.jpg" alt="">
+                  <img src="https://instructbrain.com/demo/photo-5.jpg" alt="">
+                </div>
+                <div class="cpanel">
+                  <div class="chead"><strong>Findings</strong><span>3 flagged</span></div>
+                  <div class="crow"><span class="chip pass">Pass</span><span>F-001 Sealant: perimeter</span></div>
+                  <div class="crow"><span class="chip warn">Warn</span><span>F-002 Ponding: valley gutter</span></div>
+                  <div class="crow"><span class="chip na">Not assessed</span><span>F-003 Cavity tray: human review</span></div>
+                </div>
+                <div class="cdock"><span class="mini solid">Publish report</span><span class="mini">Preview</span><span class="mini">Share</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="deck capped deadband">
+          <div class="inner">
+            <div class="three">
+              <a href="#"><span class="ic">▤</span><span class="lab"><b>Create custom report→</b></span><span class="obj">🧰</span></a>
+              <a href="#"><span class="ic">▦</span><span class="lab"><b>Create project report→</b></span><span class="obj">📐</span></a>
+              <a href="#"><span class="ic">◈</span><span class="lab"><b>Create register→</b></span><span class="obj">📋</span></a>
+            </div>
+            <p class="free">Free for your first 3 reports. No card required.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="why">The hatched strip is the wasted width. On the live page at 1440px it is <b>384px wide</b> — everything below the hero is capped at 896px (<code>max-w-4xl</code>) and left-aligned inside a 1280px page — and it runs down the whole page, not just here.</div>
+  </section>
+
+  <!-- ============================ 2. ALIGNED ============================ -->
+  <section class="view" data-view="a">
+    <h1 class="vt">2 · Aligned — smallest change</h1>
+    <p class="lede">Same split hero and the same report mock, but one width for the whole page and buttons that read cleanly. If you like the split, this is the cheapest fix.</p>
+    <div class="site">
+      <div class="sbar"><span class="wm"><i>instruct</i><b>Brain</b></span><span class="signin">Sign in</span></div>
+      <div class="hero">
+        <div class="wrap">
+          <div class="hero-grid">
+            <div>
+              <div class="wm" style="font-size:clamp(2rem,4vw,3rem)"><i>instruct</i><b>Brain</b></div>
+              <p class="tagline">Photos in. Client-ready reports out.</p>
+              <h1 class="big">Walk the site. Publish the same afternoon.</h1>
+              <p class="copy">Point, shoot, done. instructBrain turns your site photos into a client-ready report, referenced against the health and safety and building regulations that apply — with the proof and the dates regulators ask for.</p>
+              <div class="ctas">
+                <span class="btn-split"><span class="t">Start free</span><span class="a">→</span></span>
+                <span class="btn-line">See how it works</span>
+              </div>
+            </div>
+            <div class="console">
+              <div class="ctop"><span class="wm"><i>instruct</i><b>Brain</b></span><span>Site walk · ALM-2026-0142</span></div>
+              <div class="cstrip">
+                <img src="https://instructbrain.com/demo/photo-1.jpg" alt="">
+                <img src="https://instructbrain.com/demo/photo-2.jpg" alt="">
+                <img src="https://instructbrain.com/demo/photo-5.jpg" alt="">
+              </div>
+              <div class="cpanel">
+                <div class="chead"><strong>Findings</strong><span>3 flagged</span></div>
+                <div class="crow"><span class="chip pass">Pass</span><span>F-001 Sealant: perimeter</span></div>
+                <div class="crow"><span class="chip warn">Warn</span><span>F-002 Ponding: valley gutter</span></div>
+                <div class="crow"><span class="chip na">Not assessed</span><span>F-003 Cavity tray: human review</span></div>
+              </div>
+              <div class="cdock"><span class="mini solid">Publish report</span><span class="mini">Preview</span><span class="mini">Share</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="deck">
+        <div class="inner">
+          <h3>What are you writing up?</h3>
+          <div class="three">
+            <a href="#"><span class="ic">▤</span><span class="lab"><b>Custom report</b><s>One-off inspection or audit</s></span><span class="obj">→</span></a>
+            <a href="#"><span class="ic">▦</span><span class="lab"><b>Project report</b><s>A site, from start to handover</s></span><span class="obj">→</span></a>
+            <a href="#"><span class="ic">◈</span><span class="lab"><b>Register</b><s>Weekly compliance, on a cycle</s></span><span class="obj">→</span></a>
+          </div>
+          <p class="free">Free for your first 3 reports. No card required.</p>
+        </div>
+      </div>
+    </div>
+    <div class="why">
+      <b>What changes:</b>
+      <ul>
+        <li>The 896px cap comes off, so the buttons, the slogan and the report panel run the full 1280px and line up with the hero card above.</li>
+        <li>Buttons get one job each: icon, name, a line saying what it produces, one arrow. The 3D objects come out of the text flow.</li>
+        <li>Everything can be done in the existing layout — no new sections.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============================ 3. WIDE SCREEN ============================ -->
+  <section class="view" data-view="b">
+    <h1 class="vt">3 · Wide screen — the one I'd build</h1>
+    <p class="lede">Copy gets the full width at the top, then the report screen runs edge to edge underneath it, then the three report types. Nothing is competing for a narrow column, so there is nowhere for a dead strip to sit.</p>
+    <div class="site">
+      <div class="sbar"><span class="wm"><i>instruct</i><b>Brain</b></span><span class="signin">Sign in</span></div>
+      <div class="hero centred">
+        <div class="wrap">
+          <div class="wm" style="font-size:clamp(2rem,4vw,3rem)"><i>instruct</i><b>Brain</b></div>
+          <p class="tagline">Photos in. Client-ready reports out.</p>
+          <h1 class="big">Walk the site. Publish the same afternoon.</h1>
+          <p class="copy">Point, shoot, done. instructBrain turns your site photos into a client-ready report, referenced against the health and safety and building regulations that apply — with the proof and the dates regulators ask for.</p>
+          <div class="ctas">
+            <span class="btn-split"><span class="t">Start free</span><span class="a">→</span></span>
+            <span class="btn-line">See how it works</span>
+          </div>
+          <div class="wide-screen">
+            <div class="console">
+              <div class="ctop"><span class="wm"><i>instruct</i><b>Brain</b></span><span>Site walk · ALM-2026-0142</span></div>
+              <div class="cstrip">
+                <img src="https://instructbrain.com/demo/photo-1.jpg" alt="">
+                <img src="https://instructbrain.com/demo/photo-2.jpg" alt="">
+                <img src="https://instructbrain.com/demo/photo-5.jpg" alt="">
+                <img src="https://instructbrain.com/demo/photo-4.jpg" alt="">
+                <img src="https://instructbrain.com/demo/photo-3.jpg" alt="">
+              </div>
+              <div class="cpanel">
+                <div class="chead"><strong>Findings</strong><span>3 flagged</span></div>
+                <div class="crow"><span class="chip pass">Pass</span><span>F-001 Sealant failure to parapet upstand</span></div>
+                <div class="crow"><span class="chip warn">Warn</span><span>F-002 Ponding to flat roof outlet</span></div>
+                <div class="crow"><span class="chip na">Not assessed</span><span>F-003 Obscured — light too poor to judge</span></div>
+              </div>
+              <div class="cdock"><span class="mini solid">Publish report</span><span class="mini">Preview</span><span class="mini">Share</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="deck">
+        <div class="inner">
+          <h3>What are you writing up?</h3>
+          <div class="three">
+            <a href="#"><span class="ic">▤</span><span class="lab"><b>Custom report</b><s>One-off inspection or audit</s></span><span class="obj">→</span></a>
+            <a href="#"><span class="ic">▦</span><span class="lab"><b>Project report</b><s>A site, from start to handover</s></span><span class="obj">→</span></a>
+            <a href="#"><span class="ic">◈</span><span class="lab"><b>Register</b><s>Weekly compliance, on a cycle</s></span><span class="obj">→</span></a>
+          </div>
+          <p class="free">Free for your first 3 reports. No card required.</p>
+        </div>
+      </div>
+    </div>
+    <div class="rec">
+      <b>Why this one.</b> The screen is the pitch, so it should be the biggest object on the page instead of a prop beside the copy.
+      It kills the squashed-block problem at the root — with a full-width screen there is no second column to align to, so no block can end up
+      stranded down the left. It also reads better on a phone: heading, one paragraph, then the product, then the three things you can make.
+    </div>
+  </section>
+
+  <!-- ============================ 4. DARK SCREEN ============================ -->
+  <section class="view" data-view="c">
+    <h1 class="vt">4 · Dark screen — keeps the split, drops the white slab</h1>
+    <p class="lede">The same split as today, but the mock becomes the product's own navy console with the report inside it, so the page's white space is the report rather than a slab floated on the right.</p>
+    <div class="site">
+      <div class="sbar"><span class="wm"><i>instruct</i><b>Brain</b></span><span class="signin">Sign in</span></div>
+      <div class="hero">
+        <div class="wrap">
+          <div class="hero-grid">
+            <div>
+              <div class="wm" style="font-size:clamp(2rem,4vw,3rem)"><i>instruct</i><b>Brain</b></div>
+              <p class="tagline">Photos in. Client-ready reports out.</p>
+              <h1 class="big">Walk the site. Publish the same afternoon.</h1>
+              <p class="copy">Point, shoot, done. instructBrain turns your site photos into a client-ready report, referenced against the health and safety and building regulations that apply — with the proof and the dates regulators ask for.</p>
+              <div class="ctas">
+                <span class="btn-split"><span class="t">Start free</span><span class="a">→</span></span>
+                <span class="btn-line">See how it works</span>
+              </div>
+            </div>
+            <div class="console dark">
+              <div class="ctop"><span class="wm"><i>instruct</i><b>Brain</b></span><span>Site walk · ALM-2026-0142</span></div>
+              <div class="cstrip">
+                <img src="https://instructbrain.com/demo/photo-1.jpg" alt="">
+                <img src="https://instructbrain.com/demo/photo-2.jpg" alt="">
+                <img src="https://instructbrain.com/demo/photo-5.jpg" alt="">
+              </div>
+              <div class="cpanel">
+                <div class="chead"><strong>Findings</strong><span>3 flagged</span></div>
+                <div class="crow"><span class="chip pass">Pass</span><span>F-001 Sealant: perimeter</span></div>
+                <div class="crow"><span class="chip warn">Warn</span><span>F-002 Ponding: valley gutter</span></div>
+                <div class="crow"><span class="chip na">Not assessed</span><span>F-003 Cavity tray: human review</span></div>
+              </div>
+              <div class="cdock"><span class="mini solid">Publish report</span><span class="mini">Preview</span><span class="mini">Share</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="deck">
+        <div class="inner">
+          <h3>What are you writing up?</h3>
+          <div class="three">
+            <a href="#"><span class="ic">▤</span><span class="lab"><b>Custom report</b><s>One-off inspection or audit</s></span><span class="obj">→</span></a>
+            <a href="#"><span class="ic">▦</span><span class="lab"><b>Project report</b><s>A site, from start to handover</s></span><span class="obj">→</span></a>
+            <a href="#"><span class="ic">◈</span><span class="lab"><b>Register</b><s>Weekly compliance, on a cycle</s></span><span class="obj">→</span></a>
+          </div>
+          <p class="free">Free for your first 3 reports. No card required.</p>
+        </div>
+      </div>
+    </div>
+    <div class="why">
+      <b>Watch-outs if you pick this one:</b>
+      <ul>
+        <li>The navy screen on a navy hero is a lower-contrast start than a white one — it needs the green edge and the photo strip to separate it from the page.</li>
+        <li>It is the most work of the three, because the mock's markup and the console's styling both change.</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="foot">
+    <b>Read this as a mock-up, not a build.</b> These are hand-built pages matching the live one by eye, to settle the layout.
+    Once you pick a direction, the real change goes into the repo with its own typecheck and tests, and you get a nod before anything publishes.
+    <br><br>
+    Built by Banksy for Dal Hopwood · 13 October 2026 · measured from instructbrain.com.
+  </div>
+</div>
+
+<script>
+  (function () {
+    var btns = document.querySelectorAll('.switch button');
+    function show(name) {
+      document.querySelectorAll('.view').forEach(function (v) {
+        v.classList.toggle('on', v.getAttribute('data-view') === name);
+      });
+      btns.forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.go === name)); });
+      try { history.replaceState(null, '', '#' + name); } catch (e) {}
+    }
+    btns.forEach(function (b) { b.addEventListener('click', function () { show(b.dataset.go); }); });
+    var start = (location.hash || '').replace('#', '');
+    if (['today', 'a', 'b', 'c'].indexOf(start) >= 0) show(start);
+  })();
+</script>
+</body>
+</html>
