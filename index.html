@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>instructBrain — website film</title>
+<style>
+  :root { --navy:#1b2f5e; --deep:#101c3a; --green:#57FF00; --ink:#eef3ff; --mut:#9fb6dd; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:linear-gradient(160deg,var(--navy),var(--deep) 70%,#0a1224);
+         color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+         line-height:1.6; padding:28px 18px 60px; }
+  .wrap { max-width:920px; margin:0 auto; }
+  .wm { font-size:34px; font-weight:800; letter-spacing:-.5px; }
+  .wm b { color:var(--green); }
+  h1 { font-size:26px; font-weight:700; margin:18px 0 6px; }
+  .sub { color:var(--mut); font-size:16px; margin-bottom:22px; }
+  video { width:100%; border-radius:12px; background:#000; display:block; border:1px solid rgba(255,255,255,.12); }
+  .bar { display:flex; flex-wrap:wrap; gap:12px; align-items:center; margin:14px 0 30px; }
+  a.btn { display:inline-block; padding:11px 18px; border-radius:9px; text-decoration:none;
+          font-weight:600; font-size:15px; }
+  a.primary { background:var(--green); color:#0b1a06; }
+  a.ghost { border:1px solid rgba(255,255,255,.35); color:var(--ink); }
+  h2 { font-size:15px; letter-spacing:1.6px; text-transform:uppercase; color:var(--green); margin:28px 0 10px; }
+  ul { padding-left:20px; } li { margin-bottom:6px; font-size:15px; }
+  .card { background:rgba(255,255,255,.045); border:1px solid rgba(255,255,255,.10);
+          border-radius:12px; padding:18px 20px; margin-bottom:14px; }
+  .card p { font-size:15px; }
+  .fine { color:var(--mut); font-size:13.5px; margin-top:26px; border-top:1px solid rgba(255,255,255,.12); padding-top:16px; }
+  table { width:100%; border-collapse:collapse; font-size:14px; }
+  td { padding:5px 0; vertical-align:top; border-bottom:1px solid rgba(255,255,255,.07); }
+  td.t { color:var(--mut); white-space:nowrap; padding-right:14px; width:74px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="wm">instruct<b>Brain</b></div>
+  <h1>Website film — first cut</h1>
+  <p class="sub">2 minutes 11 seconds. Built from live product screens and real site photographs.
+     Nothing on screen is invented, and nothing is AI footage.</p>
+
+  <video controls preload="metadata" poster="./poster.jpg">
+    <source src="./instructBrain-film-v1.mp4" type="video/mp4">
+    Your browser cannot play this video.
+  </video>
+  <div class="bar">
+    <a class="btn primary" href="./instructBrain-film-v1.mp4" download>Download the master (MP4)</a>
+    <a class="btn ghost" href="./instructBrain-film-v1.mp4">Open the file on its own</a>
+  </div>
+
+  <h2>What is real</h2>
+  <div class="card">
+    <ul>
+      <li><strong>Every product screen</strong> is a real capture of instructbrain.com at 2x, taken while signed in to the Demonstration account.</li>
+      <li><strong>Every photograph</strong> is a real weatherproofing investigation photograph. Originals kept; metadata stripped; no faces.</li>
+      <li><strong>Every claim</strong> is the product's own copy, or its own terms, quoted verbatim.</li>
+    </ul>
+  </div>
+
+  <h2>What is synthetic</h2>
+  <div class="card">
+    <ul>
+      <li><strong>Narration</strong> — machine voice (edge-tts, en-GB-Ryan).</li>
+      <li><strong>Music bed</strong> — machine generated, from the previous promo's paid bed, reused.</li>
+      <li><strong>Captions and cards</strong> — typography rendered for the film, not screenshots.</li>
+      <li><strong>No AI footage.</strong> Every frame is a real screen or a real photograph.</li>
+    </ul>
+  </div>
+
+  <h2>About the numbers on the dashboard</h2>
+  <div class="card">
+    <p>The dashboard shown is the <strong>Demonstration account</strong>, and its figures were deliberately
+       dressed for this film so the account reads like a job in progress (56 open items, 4 overdue,
+       52% closed out). Those figures are sample data in a demonstration account only. No live client
+       data was changed to make this film.</p>
+  </div>
+
+  <h2>Running order</h2>
+  <div class="card">
+    <table>
+      <tr><td class="t">0:00</td><td>The photographs you already take</td></tr>
+      <tr><td class="t">0:15</td><td>Photos in. Client-ready reports out.</td></tr>
+      <tr><td class="t">0:25</td><td>Health and safety, and every part of the building regulations — named, never invented</td></tr>
+      <tr><td class="t">0:34</td><td>Walk the site. Publish the same afternoon.</td></tr>
+      <tr><td class="t">0:41</td><td>Custom reports, project reports, compliance registers</td></tr>
+      <tr><td class="t">0:49</td><td>Point, shoot, done</td></tr>
+      <tr><td class="t">0:56</td><td>AI drafts the findings. You confirm and publish.</td></tr>
+      <tr><td class="t">1:04</td><td>The four-rung urgency ladder</td></tr>
+      <tr><td class="t">1:13</td><td>Suggested trades, health and safety, close-out</td></tr>
+      <tr><td class="t">1:21</td><td>The weekly register</td></tr>
+      <tr><td class="t">1:29</td><td>It refuses to guess — the trust beat</td></tr>
+      <tr><td class="t">1:38</td><td>The terms line, verbatim</td></tr>
+      <tr><td class="t">1:48</td><td>Published PDF and share link</td></tr>
+      <tr><td class="t">1:54</td><td>One walk, four reports — and the offer</td></tr>
+    </table>
+  </div>
+
+  <p class="fine">
+    Contains no client names, no client findings and no identifiable faces. The client names and
+    project references visible in the product screens belong to the Demonstration account.
+    Prepared for internal review before publication.
+  </p>
+</div>
+</body>
+</html>
